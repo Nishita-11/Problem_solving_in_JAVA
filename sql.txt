@@ -1,0 +1,359 @@
+SQL Day-2
+---------
+
+
+
+Constraints
+-----------
+1.Check
+2.Default
+3.Primary Key
+4.Foreign Key
+
+
+
+
+1.Check
+-------
+create table emp1 (id int primary key, age int, check (age >= 18));
+
+desc emp1;
+
+insert into emp1 values (1, 25);
+select * from emp1;
+
+insert into emp1 values (2, 15);
+ERROR 3819 (HY000): Check constraint 'emp1_chk_1' is violated.
+
+insert into emp1 values (2, 21);
+select * from emp1;
+
+
+
+
+2.Default
+---------
+create table emp1 (id int, city varchar(20) default 'Hyd');
+desc emp1;
+
+insert into emp1 values (1, 'Chennai');
+select * from emp1;
+
+insert into emp1 values (2, null);
+select * from emp1;
+
+insert into emp1 (id) values (3);
+select * from emp1;
+Primary Key & Foreign Key Relationship
+--------------------------------------
+
+Department Table
+----------------
+create table department (deptId int primary key, deptName varchar(20), location varchar(20));
+desc department;
+select * from department;
+
+insert into department values (10, 'Sales', 'Hyd');
+insert into department values (20, 'IT', 'Chennai');
+insert into department values (30, 'HR', 'Pune');
+select * from department;
+
+
+
+Employee Table
+--------------
+create table employee (
+empId int(4) primary key,
+empName varchar(20),
+salary double,
+deptId int,
+foreign key (deptId) references department(deptId)
+);
+
+desc employee;
+
+
+select * from department;
+
+
+insert into employee values (1, 'Harsha', 1212.12, 40);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`iiitsricity`.`employee`, CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`deptId`) REFERENCES `department` (`deptId`))
+
+
+insert into employee values (1, 'Harsha', 1212.12, 10);
+insert into employee values (2, 'Pasha', 2323.23, 10);
+insert into employee values (3, 'Venkat', 3434.34, 20);
+
+select * from employee;
+Delete Operation on Department
+------------------------------
+select * from employee;
+delete from employee where empId=2;
+
+select * from employee;
+select * from department;
+delete from department where deptId=30;
+
+select * from department;
+delete from department where deptId=20;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`iiitsricity`.`employee`, CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`deptId`) REFERENCES `department` (`deptId`))
+
+delete from employee where deptId=20;
+select * from employee;
+
+delete from department where deptId=20;
+select * from department;
+
+
+
+
+
+drop table employee;
+On Delete Cascade
+-----------------
+create table employee (
+empId int(4) primary key,
+empName varchar(20),
+salary double,
+deptId int,
+foreign key (deptId) references department(deptId) on delete cascade
+);
+
+insert into employee values (1, 'Harsha', 1212.12, 10);
+insert into employee values (2, 'Pasha', 2323.23, 10);
+insert into employee values (3, 'Venkat', 3434.34, 10);
+insert into employee values (4, 'Venu', 3434.34, 20);
+insert into employee values (5, 'Raju', 3434.34, 20);
+insert into employee values (6, 'Ramu', 3434.34, 20);
+insert into employee values (7, 'Kiran', 3434.34, 30);
+insert into employee values (8, 'Kishore', 3434.34, 30);
+insert into employee values (9, 'Sree', 3434.34, 30);
+
+Select * from employee;
+select * from department;
+
+delete from department where deptId=30;
+select * from department;
+
+select * from employee;
+delete from department where deptId=20;
+
+select * from department;
+select * from employee;
+
+delete from department where deptId=10;
+select * from department;
+select * from employee;
+
+
+drop table employee;
+On Delete set null
+------------------
+
+
+
+insert into department values (10, 'Sales', 'Hyd');
+insert into department values (20, 'IT', 'Chennai');
+insert into department values (30, 'HR', 'Pune');
+select * from department;
+
+
+
+create table employee (
+empId int(4) primary key,
+empName varchar(20),
+salary double,
+deptId int,
+foreign key (deptId) references department(deptId) on delete set null
+);
+
+insert into employee values (1, 'Harsha', 1212.12, 10);
+insert into employee values (2, 'Pasha', 2323.23, 10);
+insert into employee values (3, 'Venkat', 3434.34, 10);
+insert into employee values (4, 'Venu', 3434.34, 20);
+insert into employee values (5, 'Raju', 3434.34, 20);
+insert into employee values (6, 'Ramu', 3434.34, 20);
+insert into employee values (7, 'Kiran', 3434.34, 30);
+insert into employee values (8, 'Kishore', 3434.34, 30);
+insert into employee values (9, 'Sree', 3434.34, 30);
+
+Select * from employee;
+select * from department;
+
+delete from department where deptId=30;
+select * from department;
+
+select * from employee;
+delete from department where deptId=20;
+
+select * from department;
+select * from employee;
+Sree Harsha Reddy  to  Everyone 19:03
+.
+.
+.
+.
+.
+.
+.
+SQL Day-1
+---------
+
+
+DQL - Data Quering Language (Fetch, Filter -> Select)
+DDL - Data Defination Language (Create, Alter, Drop) (Database & Table)
+DML - Data Manupulation Language (Insert, Update, Delete) (Table Data)
+
+
+Database Server -> Database     ->   Table
+(root/root)        iiitsricity       student
+SQL Queries
+-----------
+
+01. Clear the Screen
+system cls;
+
+
+02. Show All Available Databases in MySQL Server
+show databases;
+
+
+03. Create a dabase called iiitsricity
+create database iiitsricity;
+
+
+03. to use the iiitsricity database
+use iiitsricity;
+
+
+04. Show All Available tables in the iiitsricity database
+show tables;
+
+
+05. Create a student able in the iiitsricity database;
+create table student (
+sid int, 
+sname varchar(20), 
+course varchar(20), 
+fees double);
+
+
+06. Describing the Table
+desc student;
+
+
+07. Display All records from student table;
+Select * from Student;
+
+
+08. Adding a record into the student table;
+insert into student values (101, 'Harsha', 'SQL', 5000.00);
+insert into student values (102, 'Pasha', 'Java', 5000.00);
+
+
+9. Displaying the student records
+select sname, course from student;
+select fees, sname from student;
+
+
+10. Update the course Fees value as 6000 for SQL course.
+update student set fees=6000;
+The above query will update the fees to 6000 for all the records.
+
+
+11. Update one single record, like java update fees by 5000
+update student set fees=500 where sid=102;
+
+
+12. Adding one more record into the student table
+insert into student values (103, 'Venkat', 'PEGA', 7000);
+
+
+13. Delete a record from student table;
+delete from student where sid=103;
+
+
+14. Delete all records from the student table;
+delete from student;
+
+
+15. Delete the student table from the database;
+drop table student;
+
+
+16. Delete the iiitsricity database
+drop database iiitsricity;
+Constraints
+-----------
+1.Not Null
+2.Unique
+3.Primary Key
+4.Foreign Key
+5.Check
+6.Default
+
+
+create table emp1 (empId int, age int);
+insert into emp1 values (null, null);
+insert into emp1 values (null, null);
+insert into emp1 values (1, null);
+select * from emp1;
+insert into emp1 values (null, 20);
+select * from emp1;
+
+
+
+1. Not Null
+-----------
+create table emp1(empId int not null, age int);
+desc emp1;
+
+insert into emp1 values (null, null);
+ERROR 1048 (23000): Column 'empId' cannot be null
+
+insert into emp1 values (1, null);
+select * from emp1;
+insert into emp1 values (1, null);
+select * from emp1;
+
+Duplicate Data is allowed in empId.
+Not null is not accepting the null values but
+accepting the duplicate values.
+
+
+2.Unique
+--------
+create table emp1 (empId int unique, age int);
+desc emp1;
+insert into emp1 values (null, null);
+select * from emp1;
+insert into emp1 values (null, null);
+select * from emp1;
+insert into emp1 values (1, 22);
+select * from emp1;
+
+insert into emp1 values (1, 22);
+ERROR 1062 (23000): Duplicate entry '1' for key 'emp1.empId'
+
+insert into emp1 values (2, 32);
+select * from emp1;
+
+
+
+3.Primary Key
+-------------
+Primary is a combination of Not Null & Unique
+
+create table emp1 (empId int primary key, age int);
+desc emp1;
+
+insert into emp1 values (null, null);
+ERROR 1048 (23000): Column 'empId' cannot be null
+
+insert into emp1 values (1, null);
+
+insert into emp1 values (1, null);
+ERROR 1062 (23000): Duplicate entry '1' for key 'emp1.PRIMARY'
+
+insert into emp1 values (2, 23);
+select * from emp1;

@@ -1,0 +1,40 @@
+body{
+    background-color: rgb(21, 21, 125);
+}
+
+#game{
+    background-color: lightgray;
+    padding: 10px;
+    width: 50%;
+    margin: 0 auto;
+
+}
+
+#controls{
+    border: 1px black solid;
+    padding:5px;
+}
+
+#stats{
+    border: 1px black solid;
+    padding:5px;
+}
+
+#text{
+    background-color: black;
+    color: white;
+    padding: 5px;
+}
+
+
+#monsterStats {
+    display: none;
+    border: 1px black solid;
+    color: white;
+    padding: 5px;
+    background-color: red;
+  }
+  
+  .stat {
+    padding-right: 10px;
+  }

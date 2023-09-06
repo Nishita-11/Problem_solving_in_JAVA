@@ -1,0 +1,95 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct node{
+    int data;
+    struct node *next;
+};
+
+struct node *head = 0;
+
+
+void display(){
+    struct node *temp;
+    temp=head;
+    printf("Linked list\n");
+    //printf(" head = %d",temp->data);
+    while(temp != 0){
+        printf("%d ",temp->data);
+        temp=temp->next;
+    }
+    printf("\n");
+}
+
+
+
+int createnode(int n){
+    
+    struct node *temp = head;
+    struct node *newnode = (struct node *)malloc(sizeof(struct node));
+    
+    if(head == 0){
+        newnode->data = n;
+        newnode->next = 0;
+        head=newnode;
+        temp=newnode;
+        
+    }
+    else{
+        while(temp->next != 0){
+            temp = temp->next;
+        }
+        newnode->data = n;
+        newnode->next = 0;
+        temp->next = newnode;
+        temp=newnode;
+        
+    }
+    
+    display();
+}
+
+
+
+void printmiddle(struct node *head){
+    struct node *slow=head;
+    struct node *fast=head;
+    
+    if(head != NULL){
+        while(fast != NULL && fast->next != NULL){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+    }
+    printf("\n middle :%d\n",slow->data);
+    
+}
+
+
+void main()
+{
+    int x,n,p;
+   
+     printf("-> Enter '1' to insert into linked list\n");
+    scanf("%d",&x);
+    
+    while(x != 0){
+        switch(x){
+            case 1: printf("Enter the number to be inserted:\n");
+                    scanf("%d",&n);
+                    createnode(n);
+                    
+                    break;
+        }
+        printf("-> Enter '1' to insert into linked list\n");
+    scanf("%d",&x);
+      
+    }
+     printmiddle(head);              
+       
+    
+    
+    
+    
+ 
+    
+}

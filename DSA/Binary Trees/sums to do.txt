@@ -1,0 +1,7 @@
+Design a stack that supports getMin() in O(1) time and O(1) extra space
+
+How to efficiently implement k stacks in a single array?
+
+Design a stack with operations on middle element
+
+Implement a stack using single queue

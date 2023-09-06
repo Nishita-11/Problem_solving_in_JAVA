@@ -1,0 +1,180 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct node{
+    int data;
+    struct node *next;
+};
+
+struct node *head = 0;
+
+void display(){
+    struct node *temp;
+    temp=head;
+    printf("Linked list\n");
+    //printf(" head = %d",temp->data);
+    while(temp != 0){
+        printf("%d ",temp->data);
+        temp=temp->next;
+    }
+    printf("\n");
+}
+
+
+int createnode(int n){
+    
+    struct node *temp = head;
+    struct node *newnode = (struct node *)malloc(sizeof(struct node));
+    
+    if(head == 0){
+        newnode->data = n;
+        newnode->next = 0;
+        head=newnode;
+        temp=newnode;
+        
+    }
+    else{
+        while(temp->next != 0){
+            temp = temp->next;
+        }
+        newnode->data = n;
+        newnode->next = 0;
+        temp->next = newnode;
+        temp=newnode;
+        
+    }
+    
+    display();
+}
+
+int count(){
+    struct node *temp = head;
+    int c = 0;
+    while(temp->next !=0){
+        c++;
+        temp = temp->next;
+    }
+    return c;
+}
+
+int insertatbeg(int n){
+    struct node *newnode = (struct node *)malloc(sizeof(struct node));
+    newnode->data = n;
+    newnode->next = head;
+    head = newnode;
+    display();
+}
+
+int insertatend(int n){
+    struct node *newnode = (struct node *)malloc(sizeof(struct node));
+    struct node *temp = head;
+    while(temp->next != 0){
+        temp = temp->next;
+    }
+    
+    newnode->data = n;
+    newnode->next = 0;
+    temp->next = newnode;
+    display();
+}
+
+int insertatpos(int p, int n){
+    
+    int c = count();
+    if(p>=c){
+        printf("invalid position");
+    }
+    else{
+        struct node *temp = head;
+        struct node *newnode = (struct node *)malloc(sizeof(struct node));
+        newnode->data = n;
+        for(int i=1;i<p;i++){
+            temp = temp->next;
+        }
+        newnode->next = temp->next;
+        temp->next = newnode;
+        display();
+    }
+    
+    
+}
+
+int deletebeg(){
+    struct node *temp = head;
+    head = head->next;
+    free(temp);
+    display();
+}
+
+
+int deleteend(){
+    struct node *prenode;
+    struct node *temp = head;
+    while(temp->next != 0){
+        prenode = temp;
+        temp = temp->next;
+    }
+    if(temp == head){
+        head = 0;
+    }
+    else{
+        prenode->next = 0;
+    }
+    free(temp);
+    display();
+}
+
+int deletepos(int p){
+    struct node *nextnode,*temp = head;
+    for(int i=1;i<p-1;i++){
+        temp=temp->next;
+    }
+    
+    nextnode = temp->next;
+    temp->next = nextnode->next;
+    free(nextnode);
+}
+
+int main()
+{
+    int x,n,p;
+    printf("-> Enter '1' to insert into linked list\n-> Enter '2' to insert into linked list at begining\n-> Enter '3' to insert into linked list at a given position\n-> Enter '4' to insert into linked list at the end\n-> Enter '5' to delete from begining\n-> Enter '6' to delete from position\n-> Enter '7' to delete from end\n");
+    scanf("%d",&x);
+    
+    while(x != 0){
+        switch(x){
+            case 1: printf("Enter the number to be inserted:\n");
+                    scanf("%d",&n);
+                    createnode(n);
+                    break;
+            case 2: printf("Enter the number to be inserted:\n");
+                    scanf("%d",&n);
+                    insertatbeg(n);
+                    break;
+            case 3: printf("Enter the position to insert after:\n");
+                    scanf("%d",&p);
+                    printf("Enter the number to be inserted:\n");
+                    scanf("%d",&n);
+                    insertatpos(p,n);
+                    break;
+            case 4: printf("Enter the number to be inserted:\n");
+                    scanf("%d",&n);
+                    insertatend(n);
+                    break;
+            case 5: deletebeg(n);
+                    break;
+            case 3: printf("Enter the position to delete:\n");
+                    scanf("%d",&p);
+                    deletepos(p);
+                    break;
+            case 7: deleteend(n);
+                    break;
+        }
+        
+        printf("-> Enter '1' to insert into linked list\n-> Enter '2' to insert into linked list at begining\n-> Enter '3' to insert into linked list at a given position\n-> Enter '4' to insert into linked list at the end\n-> Enter '5' to delete from begining\n-> Enter '6' to delete from position\n-> Enter '7' to delete from end\n");
+        scanf("%d",&x);
+    }
+    
+    
+ 
+    
+}
