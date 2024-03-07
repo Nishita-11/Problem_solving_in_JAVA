@@ -1,0 +1,22 @@
+import java.util.*;
+
+public class SecondLargestNum
+{
+	public static void main(String[] args) {
+		int[] nums = {1, 5, 3, 9, 7};
+		int max = Integer.MIN_VALUE;
+		int secmax = Integer.MIN_VALUE;
+		
+		for(int i=0;i<5;i++){
+		    if(nums[i] > max){
+		        secmax = max;
+		        max = nums[i];
+		    }
+		    else if(secmax < nums[i] && secmax != max){
+		        secmax = nums[i];
+		    }
+		   
+		 }
+		 System.out.print(secmax);
+	}
+}
