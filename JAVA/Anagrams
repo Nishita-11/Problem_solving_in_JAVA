@@ -1,0 +1,26 @@
+import java.util.*;
+
+public class Main
+{
+	public static void main(String[] args) {
+		String s1 = "silent";
+		String s2 = "listen";
+		
+		char[] i1 = s1.toCharArray();
+		char[] i2 = s2.toCharArray();
+		 //System.out.println(Arrays.toString(i1));
+		 //System.out.println(Arrays.toString(i2));
+		
+		Arrays.sort(i1);
+		Arrays.sort(i2);
+		//System.out.println(Arrays.toString(i1));
+		//System.out.println(Arrays.toString(i2));
+		
+		if(Arrays.equals(i1,i2)){
+		    System.out.print(s1 + " and "+ s2 + " are anagrams");
+		}
+		else{
+		    System.out.print(s1 + " and "+ s2 + "are not anagrams");
+		}
+	}
+}
