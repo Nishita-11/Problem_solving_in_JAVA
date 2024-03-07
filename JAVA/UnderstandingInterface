@@ -1,0 +1,38 @@
+
+interface Cycle{
+    // use add properties or variables in interface but cannot modified them
+    // as they are final by default
+    int a = 45;
+    void ApplyBrake(int dec);
+    void SpeedUp(int inc);
+}
+
+class AvonCycle implements Cycle{
+    void BlowHorn(){
+        System.out.println("Peep Peep");
+    }
+    
+    // methods of interface must be declared public 
+    public void ApplyBrake(int dec){
+        System.out.println("Applying brake");
+    }
+    
+    public void SpeedUp(int inc){
+        System.out.println("Speeding up");
+    }
+}
+
+public class UnderstandingInterface
+{
+	public static void main(String[] args) {
+		AvonCycle c1 = new AvonCycle();
+		// works and gives output
+		c1.ApplyBrake(1);
+		System.out.println(c1.a);
+		
+		
+		// doesnot work and error msg: cannot assign a value to final variable a
+		//c1.a = 4544;
+		//System.out.println(c1.a);
+	}
+}
