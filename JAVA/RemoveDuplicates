@@ -1,0 +1,23 @@
+import java.util.*;
+
+public class RemoveDuplicates
+{
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n=8;
+		int[] dup = new int[n]; 
+		for(int i=0;i<n;i++){
+		    dup[i] = sc.nextInt();
+		}
+		
+		Set<Integer> set = new LinkedHashSet<>();
+		
+		for(int k: dup){
+		    set.add(k);
+		}
+		Integer[] res = set.toArray(new Integer[set.size()]);
+	     System.out.println(Arrays.toString(res));
+		
+		
+	}
+}
