@@ -1,0 +1,32 @@
+import java.util.*;
+
+public class DuplicateWords
+{
+    
+    static void DuplicateWord(String input){
+        String[] words = input.split(" ");
+        
+        HashMap<String, Integer> wordCount = new HashMap<String, Integer>();
+        for(String word: words){
+            if(wordCount.containsKey(word.toLowerCase())){
+                wordCount.put(word, wordCount.get(word)+1);
+            }
+            else{
+                wordCount.put(word.toLowerCase(), 1);
+            }
+        }
+        
+        Set<String> wrd = wordCount.keySet();
+        for(String word: wrd){
+            if(wordCount.get(word) > 1){
+                System.out.print(word + " occured " + wordCount.get(word) + " times");
+            }
+        }
+        
+        
+    } 
+    
+	public static void main(String[] args) {
+		DuplicateWord("Java is java again a java");
+	}
+}
